@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 export default function App() {
-  const myRef = useRef(null);
-
+  const valRef = useRef([]);
+  const indexRef = useRef(null);
   const [inputVal, setVal] = useState('');
   const [todoArr, setTodoArr] = useState(() => {
     const savedTodos = localStorage.getItem('todos');
@@ -24,32 +24,32 @@ export default function App() {
     localStorage.setItem('todos', JSON.stringify(todoArr));
   }, [todoArr]);
 
-  const deleteTodo = (e) => {
-    let str = e.target.parentElement.innerText;
-
-    let orgStr = str.slice(0, -11);
-
-    for (let i = 0; i < todoArr.length; i++) {
-      if (todoArr[i].trim() === orgStr.trim()) {
-        let newTodoArr = [...todoArr];
-        newTodoArr.splice(i, 1);
-        setTodoArr(newTodoArr);
-        localStorage.setItem('todos', JSON.stringify(newTodoArr));
-        return;
+  function editTxt(index) 
+  {
+    let allTodos = document.querySelectorAll('.display-space')
+    for(let element of allTodos)
+    {
+      if(element.value===todoArr[index])
+      {
+        element.focus()
+        console.log('its matched')
       }
     }
   }
 
-  function editTxt() {
-    myRef.current.focus()
-  }
-
-  function handleSpanClick(event) 
-  {
+  function handleSpanClick(event) {
     const index = event.currentTarget.getAttribute('unique-id');
-    const currentUpVal = event.target.innerHTML;
+    const currentUpVal = event.target.value;
     const newTodoArr = [...todoArr];
     newTodoArr[index] = currentUpVal;
+    setTodoArr(newTodoArr);
+    localStorage.setItem('todos', JSON.stringify(newTodoArr));
+  }
+
+  function deleteTodo (index) 
+  {
+    const newTodoArr = [...todoArr];
+    newTodoArr.splice(index, 1);
     setTodoArr(newTodoArr);
     localStorage.setItem('todos', JSON.stringify(newTodoArr));
   }
@@ -57,21 +57,21 @@ export default function App() {
   return (
     <center>
       <div id="container">
-        <h2>Todo Container</h2>
+        <h2>Enter a To Do</h2>
         <input type="text" value={inputVal} onChange={updateVal} /><br /><br />
         <button id='save-btn' onClick={saveText}>Save</button>
-        <div>
+        <div ref={indexRef}>
           {todoArr.map((todo, index) => (
             <div  key={index} id="output">
-              <span
-              unique-id={index}
-                ref={myRef}
-                contentEditable
-                dangerouslySetInnerHTML={{ __html: todo }}
-                onInput={handleSpanClick}
-              ></span>
-              <span className="material-symbols-outlined" onClick={deleteTodo}>delete</span>
-              <span onClick={editTxt} className="material-symbols-outlined">edit</span>
+              <input
+                ref={todo => valRef.current.push(todo)}
+                className='display-space'
+                value={todo}
+                unique-id={index}
+                onChange={handleSpanClick}
+              />
+              <span className="material-symbols-outlined" onClick={() => deleteTodo(index)}>delete</span>
+              <span onClick={() => editTxt(index)} className="material-symbols-outlined">edit</span>
               <hr />
             </div>
           ))}

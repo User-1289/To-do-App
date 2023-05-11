@@ -16,6 +16,8 @@ input{
   height: 40px;
   font-size: 25px;
   border-radius: 10px;
+  background: none;
+
 }
 #save-btn{
   background: orange;
@@ -48,6 +50,6 @@ input{
   'GRAD' 0,
   'opsz' 48
 }
-input{
-
+.display-space{
+  border: none;
 }
