@@ -32,7 +32,6 @@ export default function App() {
       if(element.value===todoArr[index])
       {
         element.focus()
-        console.log('its matched')
       }
     }
   }
@@ -58,7 +57,14 @@ export default function App() {
     <center>
       <div id="container">
         <h2>Enter a To Do</h2>
-        <input type="text" value={inputVal} onChange={updateVal} /><br /><br />
+        <input
+        onKeyDown={(e) => {
+          if(e.key==="Enter")
+          {
+            saveText()
+          }
+        }}
+         type="text" value={inputVal} onChange={updateVal} /><br /><br />
         <button id='save-btn' onClick={saveText}>Save</button>
         <div ref={indexRef}>
           {todoArr.map((todo, index) => (
