@@ -70,12 +70,14 @@ export default function App() {
           {todoArr.map((todo, index) => (
             <div  key={index} id="output">
               <input
-                ref={todo => valRef.current.push(todo)}
-                className='display-space'
-                value={todo}
-                unique-id={index}
-                onChange={handleSpanClick}
-              />
+  type="text"
+  className="display-space"
+  value={todo}
+  unique-id={index}
+  onChange={handleSpanClick}
+  style={{ width: `${Math.max(todo.length / 2, 20)}ch` }}
+/>
+
               <span className="material-symbols-outlined" onClick={() => deleteTodo(index)}>delete</span>
               <span onClick={() => editTxt(index)} className="material-symbols-outlined">edit</span>
               <hr />
