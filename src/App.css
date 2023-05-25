@@ -57,6 +57,10 @@ body{
 
   width: 500px;
   height: auto;
+<<<<<<< HEAD
+=======
+  word-wrap:break-all;
+>>>>>>> 07e4c612da231481bbad6110d0714a0f996fd661
   font-size: 20px;
   padding: 10px;
   border: none;
@@ -76,5 +80,8 @@ background: none;
     border:1px solid black;
     text-align: center;
   }
+<<<<<<< HEAD
   
+=======
+>>>>>>> 07e4c612da231481bbad6110d0714a0f996fd661
 }
