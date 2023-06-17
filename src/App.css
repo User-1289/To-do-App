@@ -1,5 +1,12 @@
 body{
   font-family: sans-serif;
+  background-image: url('weather-2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  overflow: hidden;
 }
 .hr-cl{
   border: 5px solid white;
@@ -8,6 +15,7 @@ body{
   text-align: center;
 }
 #container{
+
   user-select: none;
   cursor: pointer;
   width:600px;
@@ -75,5 +83,7 @@ background: none;
     border:1px solid black;
     text-align: center;
   }
-  
+  .display-space{
+    width: 70%;
+  }
 }
