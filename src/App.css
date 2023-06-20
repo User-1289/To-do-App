@@ -15,13 +15,9 @@ body{
   text-align: center;
 }
 #container{
-<<<<<<< HEAD
 max-height: 95vh;
 max-width: 100%;
 overflow-y: auto;
-=======
-
->>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
   user-select: none;
   cursor: pointer;
   width:600px;
