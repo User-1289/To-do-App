@@ -16,6 +16,7 @@
     position: absolute;
     left:95%;
 }
+<<<<<<< HEAD
 .user-email{
 float: right;
 background: white;
@@ -30,6 +31,8 @@ background: white;
     background-color: gray;
     color: white;
 }
+=======
+>>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
 @media only screen and (max-width:800px)
 {
     .sign-txt{

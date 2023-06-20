@@ -5,7 +5,11 @@ import Login from './Login';
 import firebase from 'firebase/app';
 
 import { initializeApp} from "firebase/app";
+<<<<<<< HEAD
 import { getFirestore, doc, setDoc, addDoc,collection, arrayUnion,where,getDocs, query, updateDoc,arrayRemove } from "firebase/firestore";
+=======
+import { getFirestore, doc, setDoc, addDoc,collection, arrayUnion,where,getDocs, query, updateDoc } from "firebase/firestore";
+>>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
@@ -32,6 +36,7 @@ export default function App() {
   const [inputVal, setVal] = useState('');
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [user,setUser] = useState('')
+<<<<<<< HEAD
   const [todoArr,setTodoArr] = useState([])
   //const [todoArr, setTodoArr] = useState(() => {
   //  const savedTodos = localStorage.getItem('todos');
@@ -94,12 +99,37 @@ let key = '';
   //  }
   // // addTodos()
   //}, [])
+=======
+  const [todoArr, setTodoArr] = useState(() => {
+    const savedTodos = localStorage.getItem('todos');
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
+  const docRef = doc(db, "todos", "YJtzAz4F6jAmPivkNqjO");
+
+  useEffect(() =>
+  {
+    async function addTodos()
+    {
+      for(let i = 0; i < todoArr.length; i++)
+      {
+        await updateDoc(docRef,{
+          TodoArr:arrayUnion(todoArr[i])
+        })
+      }
+    }
+    addTodos()
+  }, [])
+>>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
   function updateVal(e) {
     let currentVal = e.target.value;
     setVal(currentVal);
   }
   const auth = getAuth();
 
+<<<<<<< HEAD
+=======
+  let key = localStorage.getItem("UniqueKey")
+>>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
   useEffect(()=>
   {
     async function checkUser()
@@ -119,12 +149,17 @@ let key = '';
         }
       });
 
+<<<<<<< HEAD
     /*if(localStorage.getItem("UniqueKey")!=null)
+=======
+    if(localStorage.getItem("UniqueKey")!=null)
+>>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
     {
       console.log('it sthere')
       const q = query(collection(db, 'todos'), where('UniqueId', '==', key));
       const querySnapshot = await getDocs(q);
       for (const doc of querySnapshot.docs) {
+<<<<<<< HEAD
         const data = doc.data().TodoArr;
         console.log(data)
       }
@@ -150,6 +185,22 @@ let key = '';
       TodoArr:arrayUnion(inputVal)
     })
   }
+=======
+        const data = doc.data();
+        console.log(data)
+      }
+
+    }
+    }
+    checkUser()
+  }, [])
+ const saveText = async() => 
+  {
+    //console.log(user)
+    await updateDoc(docRef,{
+      TodoArr:arrayUnion(inputVal)
+    })
+>>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
   //  let arrToSet = [...todoArr]
   //  arrToSet.push(inputVal)
    // await addDoc(collection(db, "todos"), {
@@ -209,7 +260,11 @@ let key = '';
 
   return (
     <>
+<<<<<<< HEAD
     <Login sendArr={obj => setTodoArr(obj)} userId={id=> setUser(id)}/>
+=======
+    <Login userId={id=> setUser(id)}/>
+>>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
     <center>
     <div id="container" >
         <h2>Enter a To Do</h2>
