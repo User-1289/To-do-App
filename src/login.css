@@ -1,0 +1,43 @@
+.login-container{
+    cursor: pointer;
+    margin: 5px;
+}
+
+.sign-txt{
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    position: absolute;
+    left:90%;
+}
+.log-txt{
+    text-align: center;
+    position: absolute;
+    left:95%;
+}
+.user-email{
+float: right;
+background: white;
+}
+.options-container{
+    float: right;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), -2px -2px 4px rgba(255, 255, 255, 0.4);
+}
+.text-user{
+    background-color: gray;
+    color: white;
+}
+@media only screen and (max-width:800px)
+{
+    .sign-txt{
+        position: absolute;
+        left:75%;
+    }
+    .log-txt{
+        position: absolute;
+        left:90%;
+    }
+}
