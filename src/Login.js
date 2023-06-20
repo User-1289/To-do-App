@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from 'react'
 import './login.css'
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider,setPersistence,browserLocalPersistence, signInWithRedirect, getRedirectResult,deleteUser } from "firebase/auth";
 import { getFirestore, doc, setDoc, addDoc,collection, arrayUnion, where,getDocs, query, deleteDoc} from "firebase/firestore";
-=======
-import React from 'react'
-import './login.css'
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider,setPersistence,browserLocalPersistence } from "firebase/auth";
-import { getFirestore, doc, setDoc, addDoc,collection, arrayUnion, where,getDocs, query} from "firebase/firestore";
->>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
 
 export default function Login(props) {
     const firebaseConfig = {
@@ -26,7 +18,6 @@ export default function Login(props) {
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
-<<<<<<< HEAD
       let userData;
       const [userEmail,setUserEmail] = useState('')
       const [userPhoto,setUserPhoto] = useState('')
@@ -62,9 +53,6 @@ export default function Login(props) {
 
       async function signToGoogle() {
 
-=======
-      async function signToGoogle() {
->>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
         const auth = getAuth();
         const provider = new GoogleAuthProvider(); // Create an instance of GoogleAuthProvider
         
@@ -73,11 +61,7 @@ export default function Login(props) {
       
         if (storedAuthState) {
           const user = JSON.parse(storedAuthState);
-<<<<<<< HEAD
          // console.log('User is already signed in:', user);
-=======
-          console.log('User is already signed in:', user);
->>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
           makeArr(user.uid);
           return; // Exit the function since the user is already signed in
         }
@@ -85,10 +69,7 @@ export default function Login(props) {
         await setPersistence(auth, browserLocalPersistence); // Set the persistence to local
         
         try {
-<<<<<<< HEAD
         //  signInWithRedirect(auth, provider);
-=======
->>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
           const result = await signInWithPopup(auth, provider);
         
           // This gives you a Google Access Token. You can use it to access the Google API.
@@ -97,17 +78,11 @@ export default function Login(props) {
           
           // The signed-in user info.
           const user = result.user;
-<<<<<<< HEAD
          // console.log(user);
           localStorage.setItem("UniqueKey",user.uid)
           makeArr(user.uid);
           setUser(false)
           setShowUser(true)
-=======
-          console.log(user);
-          makeArr(user.uid);
-        
->>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
           // Store the user's authentication state in persistent storage
           localStorage.setItem('authState', JSON.stringify(user)); // You can use localStorage instead if desired
         
@@ -138,21 +113,16 @@ export default function Login(props) {
           arr.push(data);
           if (arr.length > 0) 
           {
-<<<<<<< HEAD
             if(localStorage.getItem("UniqueKey")!=null)
             {
              // console.log(localStorage.getItem("UniqueKey"))
               getData()
             }
             //console.log('I am triggered');
-=======
-            console.log('I am triggered');
->>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
             return; // Exit the makeArr function if condition is met
           }
         }
       
-<<<<<<< HEAD
        // const docRef = await addDoc(collection(db, 'todos'), 
        // {
        //   TodoArr: [],
@@ -162,20 +132,11 @@ export default function Login(props) {
           UniqueId:unique,
           TodoArr:[]
         })
-=======
-        const docRef = await addDoc(collection(db, 'todos'), 
-        {
-          TodoArr: [],
-          UniqueId: unique
-        });
-        //const docRef = doc(collection(db, "todos", unique)); // Get the document reference
->>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
         //await setDoc(docRef, {
         //  TodoArr: [],
         //  UniqueId: unique
         //});
         
-<<<<<<< HEAD
        // const docId = docRef.id;
       //localStorage.setItem("UniqueKey",unique)
         props.userId(unique);
@@ -252,17 +213,6 @@ export default function Login(props) {
               <div onClick={delUserOut} className='text-user'>Delete account</div>
             </div>
             }
-=======
-        const docId = docRef.id;
-      localStorage.setItem("UniqueKey",unique)
-        props.userId(unique);
-      }
-      
-      return (
-        <div className='login-container'>
-          <span onClick={() => {signToGoogle()}} className='sign-txt'>Sign up</span>
-          <span onClick={() => {signToGoogle()}} className='log-txt'>Login</span>
->>>>>>> b04fd2d6f55d202e6535b8775639b76b59c4a253
         </div>
       );
     }
