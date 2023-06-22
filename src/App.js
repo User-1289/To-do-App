@@ -179,13 +179,20 @@ let key = '';
     }
   }
 
-  function handleSpanClick(event) {
+  async function handleSpanClick(event) 
+  {
     const index = event.currentTarget.getAttribute('unique-id');
     const currentUpVal = event.target.value;
     const newTodoArr = [...todoArr];
     newTodoArr[index] = currentUpVal;
     setTodoArr(newTodoArr);
     localStorage.setItem('todos', JSON.stringify(newTodoArr));
+
+    let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
+
+    await updateDoc(nowDoc,{
+      TodoArr:newTodoArr
+    })
   }
 
  async function deleteTodo(index,valToDel) 
