@@ -13,22 +13,15 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 // ...
 
 export default function App() {
-  /*const firebaseConfig = {
+  const firebaseConfig = {
     apiKey: "AIzaSyACZG1v02NJ4upuFTCNk0u21OU9V4A8EJk",
     authDomain: "todo-13753.firebaseapp.com",
     projectId: "todo-13753",
     storageBucket: "todo-13753.appspot.com",
     messagingSenderId: "353536102896",
     appId: "1:353536102896:web:e93212889223cf5c790d35"
-  };*/
-  const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_KEY,
-    authDomain: "todo-13753.firebaseapp.com",
-    projectId: "todo-13753",
-    storageBucket: "todo-13753.appspot.com",
-    messagingSenderId: process.env.REACT_APP_SENDER_KEY,
-    appId: process.env.REACT_APP_FIREBASE_ID
   };
+  
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
@@ -179,20 +172,13 @@ let key = '';
     }
   }
 
-  async function handleSpanClick(event) 
-  {
+  function handleSpanClick(event) {
     const index = event.currentTarget.getAttribute('unique-id');
     const currentUpVal = event.target.value;
     const newTodoArr = [...todoArr];
     newTodoArr[index] = currentUpVal;
     setTodoArr(newTodoArr);
     localStorage.setItem('todos', JSON.stringify(newTodoArr));
-
-    let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
-
-    await updateDoc(nowDoc,{
-      TodoArr:newTodoArr
-    })
   }
 
  async function deleteTodo(index,valToDel) 
@@ -219,6 +205,15 @@ let key = '';
 
     setTodoArr(items);
     localStorage.setItem('todos', JSON.stringify(items));
+    pushDb(items)
+    async function pushDb(modArr)
+    {
+      let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
+      await updateDoc(nowDoc,{
+        TodoArr:modArr
+      })
+    }
+
   }
 
   return (
