@@ -146,6 +146,11 @@ let key = '';
   }, [])
  const saveText = async() => 
   {
+    if(inputVal.length==0)
+    {
+      alert("Enter something in the input")
+      return;
+    }
     if(localStorage.getItem("UniqueKey")==null)
     {
       alert("You need to sign in to use this website")
