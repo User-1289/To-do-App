@@ -33,6 +33,17 @@ export default function App() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [user,setUser] = useState('')
   const [todoArr,setTodoArr] = useState([])
+  const [dbRef, setDbRef] = useState({})
+  //let dbRef ;
+  useEffect(()=>
+  {
+    if(localStorage.getItem("UniqueKey")!=null)
+    {
+      setDbRef(doc(db, "todos", localStorage.getItem("UniqueKey")))
+      //dbRef = doc(db, "todos", localStorage.getItem("UniqueKey"));
+      console.log(dbRef)
+    }
+  }, [])
   //const [todoArr, setTodoArr] = useState(() => {
   //  const savedTodos = localStorage.getItem('todos');
   //  return savedTodos ? JSON.parse(savedTodos) : [];
@@ -54,7 +65,7 @@ let key = '';
   {
     //console.log('damn it')
     key = localStorage.getItem("UniqueKey")
-  docRef = doc(db, "todos", localStorage.getItem("UniqueKey"));
+ // docRef = doc(db, "todos", localStorage.getItem("UniqueKey"));
   }
 
  }, [])
@@ -144,9 +155,9 @@ let key = '';
     //console.log(user)
     if(localStorage.getItem("UniqueKey")!=null)
     {
-      let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
+    //  let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
       //console.log(docRef)
-    await updateDoc(nowDoc,{
+    await updateDoc(dbRef,{
       TodoArr:arrayUnion(inputVal)
     })
   }
@@ -179,9 +190,9 @@ let key = '';
     newTodoArr[index] = currentUpVal;
     setTodoArr(newTodoArr);
     localStorage.setItem('todos', JSON.stringify(newTodoArr));
-    let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
+    //let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
     
-    await updateDoc(nowDoc,{
+    await updateDoc(dbRef,{
       TodoArr:newTodoArr
     })
   }
@@ -191,9 +202,9 @@ let key = '';
     const newTodoArr = [...todoArr];
     newTodoArr.splice(index, 1);
     setTodoArr(newTodoArr);
-    let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
+   // let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
     //console.log(typeof nowDoc)
-    await updateDoc(nowDoc,{
+    await updateDoc(dbRef,{
       TodoArr:arrayRemove(valToDel)
     })
     localStorage.setItem('todos', JSON.stringify(newTodoArr));
@@ -213,8 +224,8 @@ let key = '';
     pushDb(items)
     async function pushDb(modArr)
     {
-      let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
-      await updateDoc(nowDoc,{
+     // let nowDoc =  doc(db, "todos", localStorage.getItem("UniqueKey"));
+      await updateDoc(dbRef,{
         TodoArr:modArr
       })
     }
